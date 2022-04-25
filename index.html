@@ -60,9 +60,21 @@
     }
 
     function openWindow() {
+      liff.openWindow({
+        url: "https://google.com",
+        external: true
+      })
     }
 
     async function getFriendship() {
+      const friend = await liff.getFriendship()
+      document.getElementById("friendship").append(friend.friendFlag)
+
+      if(!friend.friendFlag) {
+        if (confirm("เพิ่มเพื่อน")) {
+          window.location = "https://line.me/R/ti/p/@178yfyoa"
+        }
+      }
     }
 
     async function sendMsg() {
@@ -114,11 +126,11 @@
 
     async function main() {
       // alert("LINE Developers x Skooldio")
-        await liff.init({ liffId: "1657075321-ovrAn6JO" })
-        getUserProfile()
-        getEnvironment()
-        getContext()
-      // getFriendship()
+      await liff.init({ liffId: "1657075321-ovrAn6JO" })
+      getUserProfile()
+      getEnvironment()
+      getContext()
+      getFriendship()
       // createUniversalLink()
     }
     main()
