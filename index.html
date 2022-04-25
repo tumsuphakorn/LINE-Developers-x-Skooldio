@@ -69,15 +69,22 @@
     }
 
     function getContext() {
+        document.getElementById("type").append(liff.getContext().type)
+        document.getElementById("viewType").append(liff.getContext().viewType)
+        document.getElementById("utouId").append(liff.getContext().utouId)
+        document.getElementById("roomId").append(liff.getContext().roomId)
+        document.getElementById("groupId").append(liff.getContext().groupId)
     }
 
     async function getUserProfile() {
-      const profile = await liff.getProfile()
-      document.getElementById("pictureUrl").src = profile.pictureUrl
-      document.getElementById("userId").append(profile.userId)
-      document.getElementById("statusMessage").append(profile.statusMessage)
-      document.getElementById("displayName").append(profile.displayName)
-      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
+      if (liff.isLoggedIn() & liff.isInClient()) {
+        const profile = await liff.getProfile()
+        document.getElementById("pictureUrl").src = profile.pictureUrl
+        document.getElementById("userId").append(profile.userId)
+        document.getElementById("statusMessage").append(profile.statusMessage)
+        document.getElementById("displayName").append(profile.displayName)
+        document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
+      }
     }
 
     function getEnvironment() {
@@ -87,7 +94,7 @@
       document.getElementById("accessToken").append(liff.getAccessToken())
       document.getElementById("isInClient").append(liff.isInClient())
 
-      if (liff.isInClient) {
+      if (liff.isInClient()) {
         document.getElementById("btnLogOut").style.display = "none"
       } else {
         document.getElementById("btnMsg").style.display = "none"
@@ -98,24 +105,10 @@
 
     async function main() {
       // alert("LINE Developers x Skooldio")
-      try {
-        liff.init({ liffId: "1657075321-ovrAn6JO" }).then(() => {
-          console.log(liff.isLoggedIn())
-          if (liff.isLoggedIn()) {
-            getUserProfile()
-          }
-            
-            getEnvironment()
-        })
-      } catch (e) {
-        console.log(e)
-      }
-
-      
-      
-      
-      
-      // getContext()
+        await liff.init({ liffId: "1657075321-ovrAn6JO" })
+        getUserProfile()
+        getEnvironment()
+        getContext()
       // getFriendship()
       // createUniversalLink()
     }
