@@ -73,10 +73,11 @@
 
     async function getUserProfile() {
       const profile = await liff.getProfile()
-      document.getElementById("pictureUrl").src(profile.pictureUrl)
+      document.getElementById("pictureUrl").src = profile.pictureUrl
       document.getElementById("userId").append(profile.userId)
       document.getElementById("statusMessage").append(profile.statusMessage)
       document.getElementById("displayName").append(profile.displayName)
+      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
     }
 
     function getEnvironment() {
@@ -97,9 +98,23 @@
 
     async function main() {
       // alert("LINE Developers x Skooldio")
-      await liff.init({ liffId: "1657075321-ovrAn6JO" })
-      getEnvironment()
-      getUserProfile()
+      try {
+        liff.init({ liffId: "1657075321-ovrAn6JO" }).then(() => {
+          console.log(liff.isLoggedIn())
+          if (liff.isLoggedIn()) {
+            getUserProfile()
+          }
+            
+            getEnvironment()
+        })
+      } catch (e) {
+        console.log(e)
+      }
+
+      
+      
+      
+      
       // getContext()
       // getFriendship()
       // createUniversalLink()
