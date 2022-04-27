@@ -33,10 +33,11 @@
   <button id="btnShare" onclick="shareMsg()">Share Target Picker</button>
   <button onclick="openWindow()">Open Window</button>
   <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
+  <button id="btnAuth0" onclick="loginAuthO()">Auth0</button>
   <button id="btnLogOut" onclick="logOut()">Log Out</button>
   <button id="btnClose" onclick="closed()">Close</button>
 
-  <script src="js/vconsole.min.js"></script>
+  <script src="./js/vconsole.min.js"></script>
   <script>
     var vConsole = new VConsole()
     console.log("Hello World!")
@@ -44,6 +45,7 @@
   </script>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/auth0-js/9.19.0/auth0.min.js"></script>
   <script>
     function createUniversalLink() {
       const link1 = liff.permanentLink.createUrl()
@@ -85,16 +87,16 @@
       })
     }
 
-    async function getFriendship() {
-      const friend = await liff.getFriendship()
-      document.getElementById("friendship").append(friend.friendFlag)
+    // async function getFriendship() {
+    //   const friend = await liff.getFriendship()
+    //   document.getElementById("friendship").append(friend.friendFlag)
 
-      if (!friend.friendFlag) {
-        if (confirm("เพิ่มเพื่อน")) {
-          window.location = "https://line.me/R/ti/p/@178yfyoa"
-        }
-      }
-    }
+    //   if (!friend.friendFlag) {
+    //     if (confirm("เพิ่มเพื่อน")) {
+    //       window.location = "https://line.me/R/ti/p/@178yfyoa"
+    //     }
+    //   }
+    // }
 
     async function sendMsg() {
       if (liff.getContext().type !== "none") {
@@ -143,6 +145,20 @@
       }
     }
 
+    async function loginAuthO () {
+      const webAuth = new auth0.WebAuth({
+      domain: 'tum-test.us.auth0.com',
+      clientID: 'SX9Wc6bidpS01GBpa9zJmx47NTIrXFJY',
+      redirectUri: `https://app.dev.oc2.plus/callback`,
+      responseType: 'id_token token',
+      scope: 'openid profile email'
+    })
+
+    webAuth.authorize({ 
+      prompt: 'login'
+    })
+    }
+
     async function main() {
       // alert("LINE Developers x Skooldio")
       await liff.init({ liffId: "1657075321-ovrAn6JO" })
@@ -150,14 +166,13 @@
         getUserProfile()
         getEnvironment()
         getContext()
-        getFriendship()
+        // getFriendship()
         createUniversalLink()
       } else {
-        liff.login()
+        // liff.login()
       }
-      
-      
     }
+
     main()
   </script>
 </body>
