@@ -171,6 +171,23 @@
       } else {
         // liff.login()
       }
+
+      if (window.location.hash) {
+        const webAuth = new auth0.WebAuth({
+      domain: 'tum-test.us.auth0.com',
+      clientID: 'SX9Wc6bidpS01GBpa9zJmx47NTIrXFJY',
+      redirectUri: `https://tumsuphakorn.github.io/LINE-Developers-x-Skooldio`,
+      responseType: 'id_token token',
+      scope: 'openid profile email'
+    })
+        webAuth.parseHash(async (err, authResult) => {
+        try {
+          console.log(authResult)
+        } catch (e) {
+          reject(e)
+        }
+      })
+      }
     }
 
     main()
