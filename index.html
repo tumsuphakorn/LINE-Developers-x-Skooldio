@@ -180,14 +180,18 @@
           responseType: 'id_token token',
           scope: 'openid profile email'
         })
+        
+        new Promise((resolve, reject) => {
+          webAuth.parseHash({ hash: window.location.hash }, (err, authResult) => {
+            try {
+              resolve(authResult)
+            } catch (e) {
+              console.log(e)
+            }
+          })
+        }).then(result => alert(result))
 
-        webAuth.parseHash({ hash: window.location.hash }, (err, authResult) => {
-          try {
-            alert(authResult)
-          } catch (e) {
-            console.log(e)
-          }
-        })
+        
       }
     }
 
