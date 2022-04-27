@@ -45,7 +45,7 @@
   </script>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/auth0-js/9.10.2/auth0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/auth0-js/9.19.0/auth0.min.js"></script>
   <script>
     function createUniversalLink() {
       const link1 = liff.permanentLink.createUrl()
@@ -148,7 +148,7 @@
     async function loginAuthO () {
       const webAuth = new auth0.WebAuth({
       domain: 'tum-test.us.auth0.com',
-      clientID: 'SX9Wc6bidpS01GBpa9zJmx47NTIrXFJY',
+      clientID: '7ITM0QlTYMGE8NDQ5svKpUA1eUYWMg1P',
       redirectUri: `https://tumsuphakorn.github.io/LINE-Developers-x-Skooldio`,
       responseType: 'id_token token',
       scope: 'openid profile email'
@@ -175,7 +175,7 @@
       if (window.location.hash) {
         const webAuth = new auth0.WebAuth({
           domain: 'tum-test.us.auth0.com',
-          clientID: 'SX9Wc6bidpS01GBpa9zJmx47NTIrXFJY',
+          clientID: '7ITM0QlTYMGE8NDQ5svKpUA1eUYWMg1P',
           redirectUri: `https://tumsuphakorn.github.io/LINE-Developers-x-Skooldio`,
           responseType: 'id_token token',
           scope: 'openid profile email'
