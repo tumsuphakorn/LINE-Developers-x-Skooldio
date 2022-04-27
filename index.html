@@ -45,7 +45,7 @@
   </script>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/auth0-js/9.19.0/auth0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/auth0-js/9.10.2/auth0.min.js"></script>
   <script>
     function createUniversalLink() {
       const link1 = liff.permanentLink.createUrl()
@@ -183,11 +183,7 @@
         
         new Promise((resolve, reject) => {
           webAuth.parseHash({ hash: window.location.hash }, (err, authResult) => {
-            try {
-              resolve(authResult)
-            } catch (e) {
-              console.log(e)
-            }
+            resolve(authResult)
           })
         }).then(result => alert(result))
 
