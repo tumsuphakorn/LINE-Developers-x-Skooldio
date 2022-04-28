@@ -119,7 +119,7 @@
     }
 
     async function getUserProfile() {
-      if (liff.isLoggedIn() & liff.isInClient()) {
+      if (liff.isLoggedIn()) {
         const profile = await liff.getProfile()
         document.getElementById("pictureUrl").src = profile.pictureUrl
         document.getElementById("userId").append(profile.userId)
@@ -162,6 +162,7 @@
     async function main() {
       // alert("LINE Developers x Skooldio")
       await liff.init({ liffId: "1657091640-vW4zKXrD" })
+      console.log('isLoggedIn', liff.isLoggedIn)
       if (liff.isLoggedIn()) {
         getUserProfile()
         getEnvironment()
