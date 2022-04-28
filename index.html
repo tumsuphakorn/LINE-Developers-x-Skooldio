@@ -34,6 +34,7 @@
   <button onclick="openWindow()">Open Window</button>
   <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
   <button id="btnAuth0" onclick="loginAuthO()">Auth0</button>
+  <button id="btnLogin" onclick="logOut()">LINE Login</button>
   <button id="btnLogOut" onclick="logOut()">Log Out</button>
   <button id="btnClose" onclick="closed()">Close</button>
 
@@ -64,6 +65,10 @@
             "text": "Hello from Raw Fish"
           }
       ])
+    }
+
+    function login() {
+      liff.login()
     }
 
     function logOut() {
@@ -147,30 +152,27 @@
 
     async function loginAuthO () {
       const webAuth = new auth0.WebAuth({
-      domain: 'tum-test.us.auth0.com',
-      clientID: '7ITM0QlTYMGE8NDQ5svKpUA1eUYWMg1P',
-      redirectUri: `https://tumsuphakorn.github.io/LINE-Developers-x-Skooldio/callback`,
-      responseType: 'id_token token',
-      scope: 'openid profile email'
-    })
+        domain: 'tum-test.us.auth0.com',
+        clientID: '7ITM0QlTYMGE8NDQ5svKpUA1eUYWMg1P',
+        redirectUri: `https://tumsuphakorn.github.io/LINE-Developers-x-Skooldio/callback`,
+        responseType: 'id_token token',
+        scope: 'openid profile email'
+      })
 
-    webAuth.authorize({ 
-      prompt: 'login'
-    })
+      webAuth.authorize({ 
+        prompt: 'login'
+      })
     }
 
     async function main() {
       // alert("LINE Developers x Skooldio")
       await liff.init({ liffId: "1657091640-vW4zKXrD" })
-      console.log('isLoggedIn', liff.isLoggedIn)
       if (liff.isLoggedIn()) {
         getUserProfile()
         getEnvironment()
         getContext()
         // getFriendship()
         // createUniversalLink()
-      } else {
-        liff.login()
       }
 
       if (window.location.hash) {
